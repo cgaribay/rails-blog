@@ -24,6 +24,19 @@ RSpec.describe ArticlesController, type: :controller do
     it_should_behave_like 'articles controller actions'
   end
 
+  describe "GET new" do
+    subject { get :new }
+    let(:template) { "new" }
+
+    it 'assigns instance variable' do
+      expect(assigns(:article)).to be_instance_of(Article)
+    end
+
+    it 'renders the expected template' do
+      expect(response).to render_template(template)
+    end
+  end
+
   describe "GET show" do
     subject { get :show, params: { id: article.id } }
     let(:template) { "show" }
@@ -59,11 +72,11 @@ RSpec.describe ArticlesController, type: :controller do
     end
 
     context 'when article is saved successfully' do
-      subject { post :create, params: { article: { title: 'A title', body: 'this is a valid body' } } }
+      subject { post :create, params: { article: { title: 'A title', body: 'this is a valid body', status: "public" } } }
 
       it 'should redirect to show path' do
         created_article = Article.find_by(title: 'A title', body: 'this is a valid body')
-        expect(response).to redirect_to("/articles/#{created_article.id}")
+        expect(response).to redirect_to(article_path(created_article.id))
       end
 
       it 'should create a new article' do
