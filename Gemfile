@@ -44,6 +44,7 @@ gem "bootsnap", require: false
 
 gem 'poke-api-v2'
 gem 'simplecov', require: false, group: :test
+gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
