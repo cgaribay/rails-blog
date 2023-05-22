@@ -20,6 +20,7 @@ class PasswordsController < ApplicationController
 
   def edit
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
+    p "USER: #{@user.present?}  #{@user.unconfirmed?}"
     if @user.present? && @user.unconfirmed?
       redirect_to new_confirmation_path, alert: "Please confirm your email"
     elsif @user.nil?
