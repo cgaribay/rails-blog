@@ -1,5 +1,6 @@
 class ConfirmationsController < ApplicationController
   before_action :redirect_if_authenticated, only: [:create, :new]
+
   def new
     @user = User.new
   end

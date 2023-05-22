@@ -4,6 +4,7 @@ module Authentication
   included do
     before_action :current_user
     helper_method :current_user
+    helper_method :user_signed_in?
   end
 
   def login(user)
